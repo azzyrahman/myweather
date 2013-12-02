@@ -1,0 +1,13 @@
+ <% favourite_locations.each do |fav_loc| %>
+   <div class="btn-group btn-group-sm">
+    <% if !(type.eql? fav_loc.location.loc_type) || !(code.eql? fav_loc.location.loc_code) %>
+      <% if link_to.eql? 'obs' %>
+          <button type="button" class="btn btn-default"><%=link_to fav_loc.location.name, observation_path(fav_loc.location.loc_type,fav_loc.location.loc_code) %></button>
+       <% else %>
+          <button type="button" class="btn btn-default"><%=link_to fav_loc.location.name, forecast_path(fav_loc.location.loc_type,fav_loc.location.loc_code) %></button>
+      <% end %>
+    <% end %>
+   </div>
+ <% end %>
+
+ 

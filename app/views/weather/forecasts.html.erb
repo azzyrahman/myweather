@@ -1,0 +1,143 @@
+<% forecasts = @location.forecasts.inspect %>
+<% if @location %>  
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= "#{@location.name} 7-day Weather Forecast" %>&nbsp;&nbsp; 
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default"><%= link_to "Observation", observation_path(@location.loc_type,@location.loc_code) %></button>
+        <button type="button" class="btn btn-default"><%= link_to "Radar", local_radar_path(@location.loc_type,@location.loc_code) %></button>
+        <%= add_to_favourite_locations(@location.loc_type,@location.loc_code) %>
+      </div>
+      <%= show_favourite_locations(@location.loc_type,@location.loc_code,'fcast') %>
+    </div>
+
+  <% if @location.forecasts && @location.forecasts.any? %>  
+      <% forecasts = @location.forecasts %>
+      <table class="table-bordered table-striped" width="100%">
+      <tr>
+      <th width="16%" rowspan="2" class="th-row">Summary</th>
+        <% forecasts.each do |key,forecast| %>
+         <th width="12%" colspan="2"  class="fcast">
+            <span class="text_blue" style="font-size: larger;"><%= format_date(forecast.date,'%a %b %d') %></span>
+          </th>
+        <% end %>
+      </tr>
+      
+      <tr>
+        <% forecasts.each do |key,forecast| %>
+         <td valign="top" class="bg_yellow fcast" colspan="2">
+            <img src="<%=forecast_icon forecast.icon_filename%>" width="30" height="30" alt="<%=forecast.icon_phrase %>" style="margin-bottom: 4px;" /><br/>
+            <span style="font-size: 0.9em;"><%= forecast.precis ? forecast.precis : "&nbsp;" %></span>
+          </td>
+        <% end %>
+        </tr>
+       
+       <tr>
+        <th class="th-row"><acronym title="minimum temperature in the 24 hours to 9am">Minimum</acronym></th>
+          <% forecasts.each do |key,forecast| %>
+             <td style="font-weight: bold;" class="<%=forecast.min %> fcast" colspan="2">
+           <%=forecast.min %>
+          </td>
+        <% end %>
+       </tr>
+     
+        <tr>
+          <th width="16%" class="th-row"><acronym title="Chance of any precipitation falling in the 24 hours from 9am.">Chance of Rain</acronym></th>
+            <% forecasts.each do |key,forecast| %>
+            <td width="12%" colspan="2" class="bg_yellow fcast"><%=forecast.rain_prob %>
+            </td>
+            <% end %>
+        </tr>
+
+        <tr>
+          <th class="th-row"><acronym title="The amount of rain that is most likely if rain occurs.">Rain Amount</acronym></th>
+          <% forecasts.each do |key,forecast| %>
+             <td colspan="2" class="bg_yellow fcast">
+              <%=forecast.rain_range %>
+            </td>
+          <% end %>
+          </tr>
+    
+        <tr>
+          <th class="th-row">UV Index</th>
+          <% forecasts.each do |key,forecast| %>
+           <td colspan="2" class="<%=uv_class forecast.uv_text%> fcast"><span title="<%=forecast.uv_index %>"><%=forecast.uv_text %></span>
+          </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <th class="th-row">Frost Risk</th>
+          <% forecasts.each do |key,forecast| %>
+           <td colspan="2" class="<%=frost_risk_class forecast.frost_risk%> fcast"><%=forecast.frost_risk %>
+           </td>
+          <% end %>
+        </tr>
+        
+        <!-- pdf -->
+        <tr>
+          <th class="th-row">PDF&nbsp;</th>
+          <% forecasts.each do |key,forecast| %>
+            <th class="fcast"><span class="text_blue" style="font-size: 0.9em;">9am</span></th>
+            <th class="fcast"><span class="text_blue" style="font-size: 0.9em;">3pm</span></th>
+          <% end %>
+        </tr>
+
+        <tr>
+          <th class="th-row">Wind Speed</th>
+          <% forecasts.each do |key,forecast| %>
+             <td class="fcast">
+               <%=forecast.point_forecasts["09:00"].wind_speed %>km/h
+             </td>
+             <td class="fcast">
+                <%=forecast.point_forecasts["15:00"].wind_speed %>km/h
+              </td>
+          <% end %>
+        </tr>
+
+         <tr>
+          <th class="th-row">Wind Direction</th>
+          <% forecasts.each do |key,forecast| %>
+              <td class="fcast">
+                <img src="<%=wind_icon forecast.point_forecasts['09:00'].wind_direction_compass%>" width="20" height="20" alt="-"/><br/>
+                <%=forecast.point_forecasts["09:00"].wind_direction_compass %>
+              </td>
+              <td class="fcast">
+                <img src="<%=wind_icon forecast.point_forecasts['15:00'].wind_direction_compass%>" width="20" height="20" alt="-"/><br/>
+                <%=forecast.point_forecasts["15:00"].wind_direction_compass %>
+              </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <th class="th-row">Relative Humidity</th>
+          <% forecasts.each do |key,forecast| %>
+              <td class="fcast">
+                <%=forecast.point_forecasts["09:00"].relative_humidity %>%
+              </td>
+              <td class="fcast">
+                <%=forecast.point_forecasts["15:00"].relative_humidity %>%
+              </td>
+          <% end %>
+        </tr>
+
+         <tr>
+          <th class="th-row">Dew Point</th>
+            <% forecasts.each do |key,forecast| %>
+               <td class="fcast">
+                <%=forecast.point_forecasts["09:00"].dew_point %>°C
+              </td>
+              <td class="fcast">
+                <%=forecast.point_forecasts["15:00"].dew_point %>°C
+              </td>
+          <% end %>
+        </tr>
+
+     </table>
+
+    <% else %>
+      <div class="alert alert-warning">No forecast information found for this location!</div>
+    <% end %>  
+  </div>
+<% else %>
+    <div class="alert alert-warning">No location and forecast information found!</div>
+<% end %>

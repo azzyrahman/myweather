@@ -1,0 +1,62 @@
+<div class='clear'></div>
+
+<% if  @location %>
+<% obs = @location.observation %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="x">Currently at <%= @location.name %>&nbsp;&nbsp;  
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default"><%= link_to "7-day Weather Forecast", forecast_path(@location.loc_type,@location.loc_code) %></button>
+        <button type="button" class="btn btn-default"><%= link_to "Radar", local_radar_path(@location.loc_type,@location.loc_code) %></button>
+        <%= add_to_favourite_locations(@location.loc_type,@location.loc_code) %>
+      </div>
+      <%= show_favourite_locations(@location.loc_type,@location.loc_code,'obs') %>
+      
+      <span class="pull-right">Updated at <%= format_date(obs.local_time,'%H:%M:%S') %> <%= obs.tz%></span> 
+    </div>
+  </div>
+  <div class="panel-body">
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="badge"><%= obs.temperature%>°C</span>
+      Temperature
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= obs.feels_like%>°C</span>
+      Feels Like
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= obs.dew_point%>°C</span>
+      Dew Point
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= obs.relative_humidity%>%</span>
+      Relative Humidity
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><img src="<%=wind_icon obs.wind_direction_compass %>" width="20" height="20" alt="-"/>&nbsp;<%= "#{obs.wind_direction_compass} #{obs.wind_speed}km/h"%></span>
+      Wind
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><%= obs.wind_gust%>km/h</span>
+      Wind Gusts
+    </li>
+   <li class="list-group-item">
+      <span class="badge"><%= obs.rainfall_since_9am%>mm</span>
+      Rainfall since 9am
+    </li>
+   <li class="list-group-item">
+      <span class="badge"><%= obs.rainfall_last_hour%>mm</span>
+      Rainfall last hour
+    </li>
+   <li class="list-group-item">
+      <span class="badge"><%= obs.pressure%>hPa</span>
+      Pressure
+    </li>
+  </ul>
+
+ </div>
+</div>
+
+ <% end %> 

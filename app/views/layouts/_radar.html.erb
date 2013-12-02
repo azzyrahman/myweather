@@ -1,0 +1,14 @@
+<li class="dropdown <%=nav_class_radar %>">
+  <a href="<%=radar_path %>" class="dropdown-toggle" data-toggle="dropdown">Radar<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li class="<%=nav_class radar_path %>"><%= link_to "National",radar_path %></li>  
+      <li class="<%=nav_class_radar 'nsw' %>"><%= link_to "New South Wales/ACT",local_radar_path('wzstate','nsw')%></li>
+      <li class="<%=nav_class_radar 'vic' %>"><%= link_to "Victoria",local_radar_path('wzstate','vic') %></li>
+      <li class="<%=nav_class_radar 'qld' %>"><%= link_to "Queensland",local_radar_path('wzstate','qld') %></li>
+      <li class="<%=nav_class_radar 'wa' %>"><%= link_to "Western Australia",local_radar_path('wzstate','wa')%></li>
+      <li class="<%=nav_class_radar 'sa' %>"><%= link_to "South Australia",local_radar_path('wzstate','sa') %></li>
+      <li class="<%=nav_class_radar 'tas' %>"><%= link_to "Tasmania", local_radar_path('wzstate','tas') %></li>
+      <li class="<%=nav_class_radar 'nt' %>"><%= link_to "Northern Territory", local_radar_path('wzstate','nt')%></li>
+     </ul>
+  </li>
+

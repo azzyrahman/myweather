@@ -1,0 +1,29 @@
+
+<p id="notice"><%= notice %></p>
+
+<div class="panel panel-default">
+  <% if user_signed_in? && current_user.favourite_locations.any? %>
+      <% fav_locations = current_user.favourite_locations %>
+      <div class="panel-heading">
+        <span>Your current favourite locations(maximum limit 3)</span>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+        <% fav_locations.each do |fav_loc| %>
+          <li class="list-group-item"><%=link_to "#{fav_loc.location.name}, #{fav_loc.location.state} #{fav_loc.location.postcode}",observation_path(fav_loc.location.loc_type,fav_loc.location.loc_code) %>
+            <span class="label label-default"><%= link_to 'Delete', fav_loc, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+          </li>
+         <% end %>
+        </ul>
+      </div>
+  <% else %>
+    <div class="panel-heading">
+      <span>Favourite locations</span>
+    </div>
+    <div class="panel-body">
+      <div class="alert alert-warning">You don't have any favourite location!</div>
+      <%= render 'layouts/form_search' %>
+    </div>
+  <% end %>
+ </div>
+

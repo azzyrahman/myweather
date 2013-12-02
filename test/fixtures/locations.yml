@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  code: MyString
+  name: MyString
+  state: MyString
+  postcode: MyString
+  time_zone: MyString
+
+two:
+  type: 
+  code: MyString
+  name: MyString
+  state: MyString
+  postcode: MyString
+  time_zone: MyString

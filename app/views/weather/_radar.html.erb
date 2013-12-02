@@ -1,0 +1,9 @@
+<%= name %>  Radar
+<script type="text/javascript">
+  $(document).ready(function() {
+    aw.currentType = "<%= type %>"; 
+    aw.currentCode = "<%= code %>";
+    aw.reload();
+    //window.setInterval(function(){aw.reload()},300000);
+    });
+</script>

@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+  <% if @locations && @locations.any? %>  
+    <div class="panel-heading">
+      <span>List of locations matching your query</span>
+    </div>
+   <div class="panel-body">
+     <ul class="list-group">
+     <% @locations.each do |location| %>
+      <li class="list-group-item"><%=link_to "#{location.name}, #{location.state} #{location.postcode}",observation_path(location.loc_type,location.loc_code) %></li>
+    <% end %>
+  </ul>
+ </div>
+  <% else %>
+    <div class="panel-heading">
+      <span>Location search</span>
+    </div>
+    <div class="panel-body">
+      <div class="alert alert-warning">No matching location found!</div>
+      <%= render 'layouts/form_search' %>
+    </div>
+  <% end %>
+ </div>
