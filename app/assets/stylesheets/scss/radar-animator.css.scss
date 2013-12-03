@@ -80,11 +80,11 @@ div.radar div#anim img {
 }
 
 #anim_startstop.started {
-  background: #eee url('../../assets/btn-anim-pause.gif') no-repeat center center;
+  background: #eee url('/assets/btn-anim-pause.gif') no-repeat center center;
 }
 
 #anim_startstop.stopped {
-  background: #eee url('../../assets/btn-anim-play.gif') no-repeat center center
+  background: #eee url('/assets/btn-anim-play.gif') no-repeat center center
 }
 
 #anim_startstop {
@@ -101,7 +101,7 @@ div.radar div#anim img {
   -webkit-border-radius: 2px 2px;
   height: 30px;
   width: 30px;
-  background: #eee url('../../assets/btn-anim-stepforward.gif') no-repeat center center;
+  background: #eee url('/assets/btn-anim-stepforward.gif') no-repeat center center;
 }
 
 #anim_stepbackward {
@@ -110,7 +110,7 @@ div.radar div#anim img {
   -webkit-border-radius: 2px 2px;
   height: 30px;
   width: 30px;
-  background: #eee url('../../assets/btn-anim-stepbackward.gif') no-repeat center center;
+  background: #eee url('/assets/btn-anim-stepbackward.gif') no-repeat center center;
 }
 
 #anim_timestamp {
@@ -131,7 +131,7 @@ div.radar div#anim img {
   height: 30px;
   width: 30px;
   text-decoration: none;
-  background: #eee url('../../assets/btn-anim-zoomout.gif') no-repeat center center;
+  background: #eee url('/assets/btn-anim-zoomout.gif') no-repeat center center;
 }
 
 #tracker {
