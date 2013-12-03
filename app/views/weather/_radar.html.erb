@@ -1,8 +1,21 @@
-<%= name %>  Radar
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span><%= radar_name %>  Radar</span>&nbsp;&nbsp; 
+    <% if show_links %>
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default"><%= link_to "Observation", observation_path(loc_type,loc_code) %></button>
+        <button type="button" class="btn btn-default"><%= link_to "7-day Weather Forecast", forecast_path(loc_type,loc_code) %></button>
+        <%= add_to_favourite_locations(loc_type, loc_code) %>
+      </div>
+     <% end %> 
+      <%= show_favourite_locations(loc_type, loc_code,'obs') %>
+  </div>
+</div>
+
 <script type="text/javascript">
   $(document).ready(function() {
-    aw.currentType = "<%= type %>"; 
-    aw.currentCode = "<%= code %>";
+    aw.currentType = "<%= radar_type %>"; 
+    aw.currentCode = "<%= radar_code %>";
     aw.reload();
     //window.setInterval(function(){aw.reload()},300000);
     });

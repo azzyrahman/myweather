@@ -23,6 +23,10 @@ module ApplicationHelper
     name = "National"
     type = 'wzcountry';
     code = 'aus';
+
+    loc_type = location.loc_type.downcase
+    loc_code = location.loc_code.downcase
+ 
     if location.related_locations.any? && location.related_locations['local_radar'] && location.related_locations['local_radar'].any?
         radar = location.related_locations['local_radar'][0]
         name = radar.name
@@ -30,10 +34,21 @@ module ApplicationHelper
         code = radar.code.downcase
     else    
        name = location.name
-       type = location.loc_type.downcase
-       code = location.loc_code.downcase
+       type = loc_type
+       code = loc_code
     end
-     render "weather/radar", :name => name, :type => type, :code =>code 
+    
+    show_links = true
+    if (loc_type.eql? 'wzcountry') || (loc_type.eql? 'wzstate')
+      show_links = false
+    end   
+
+    render "weather/radar", :loc_type   => loc_type, 
+                            :loc_code   => loc_code, 
+                            :radar_name => name, 
+                            :radar_type => type, 
+                            :radar_code => code,
+                            :show_links => show_links;  
   end
 
   def add_to_favourite_locations(type, code)
