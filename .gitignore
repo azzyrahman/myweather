@@ -8,5 +8,5 @@
 
 # Ignore application configuration
 /config/application.yml
-#/app/assets/javascripts/custom/radar-animator.js
-#/app/views/weather/radar.html.erb
+/app/assets/javascripts/custom/radar-animator.js
+/app/views/weather/radar.html.erb
